@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.idea/
+.vscode/
+build/
+dist/
+*.spec
+logs/
+data/fleet_huge.json
+*.zip
+data/test.xml

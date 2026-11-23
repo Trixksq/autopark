@@ -1,0 +1,121 @@
+' ШІ: Claude Code, Claude Opus 5.5 – діаграма класів доменної моделі, складена з коду models/*.py станом на 2026-11-19.
+' Рендер: planttext.com або plantuml.com (вставити весь текст), або draw.io: Arrange → Insert → Advanced → PlantUML.
+@startuml domain
+!pragma layout smetana
+skinparam classAttributeIconSize 0
+hide empty members
+title Рисунок 2.1 – Діаграма класів доменної моделі (пакет models)
+
+interface Serviceable <<interface>> {
+  + {abstract} service_interval_days() : int
+  + {abstract} next_service_date() : date
+  + {abstract} days_until_service(today : date) : int
+  + {abstract} is_service_due(today : date) : bool
+}
+
+abstract class Vehicle {
+  - _plate : str
+  - _brand : str
+  - _year : int
+  - _mileage : int
+  - _last_service : date
+  --
+  + Vehicle(plate, brand, year, mileage, last_service)
+  + «property» plate : str
+  + «property» brand : str
+  + «property» year : int
+  + «property» mileage : int
+  + «property» last_service : date
+  + next_service_date() : date
+  + days_until_service(today : date) : int
+  + is_service_due(today : date) : bool
+  + {abstract} fuel_rate() : float
+  + {abstract} required_category() : str
+}
+
+class Car {
+  + fuel_rate() : float
+  + required_category() : str
+  + service_interval_days() : int
+}
+
+class Truck {
+  + fuel_rate() : float
+  + required_category() : str
+  + service_interval_days() : int
+}
+
+class Bus {
+  + fuel_rate() : float
+  + required_category() : str
+  + service_interval_days() : int
+}
+
+class Driver {
+  - _driver_id : str
+  - _full_name : str
+  - _categories : frozenset[str]
+  --
+  + Driver(driver_id, full_name, categories)
+  + «property» driver_id : str {readOnly}
+  + «property» full_name : str
+  + «property» categories : frozenset[str]
+  + has_category(category : str) : bool
+}
+
+class Trip {
+  - _trip_id : str
+  - _driver : Driver
+  - _vehicle : Vehicle
+  - _start : datetime
+  - _end : datetime
+  - _distance_km : float
+  --
+  + Trip(trip_id, driver, vehicle, start, end, distance_km)
+  + «property» trip_id : str {readOnly}
+  + «property» driver : Driver {readOnly}
+  + «property» vehicle : Vehicle {readOnly}
+  + «property» start : datetime {readOnly}
+  + «property» end : datetime {readOnly}
+  + «property» distance_km : float {readOnly}
+  + «property» fuel_l : float {readOnly}
+  + overlaps(other : Trip) : bool
+}
+
+class FleetModel {
+  - _vehicles : list[Vehicle]
+  - _drivers : list[Driver]
+  - _trips : list[Trip]
+  - _lock : threading.Lock
+  --
+  + «property» vehicles : tuple[Vehicle]
+  + «property» drivers : tuple[Driver]
+  + «property» trips : tuple[Trip]
+  + replace_all(vehicles, drivers, trips) : None
+  + add_vehicle(vehicle : Vehicle) : None
+  + add_driver(driver : Driver) : None
+  + add_trip(trip : Trip) : None
+  + find_by_plate(text : str) : list[Vehicle]
+  + find_vehicle(plate : str) : Vehicle
+  + find_driver(driver_id : str) : Driver
+  + find_conflicts(trip : Trip) : list[Trip]
+  + update_vehicle(plate, brand, year, mileage, last_service) : None
+  + update_driver(driver_id, full_name, categories) : None
+  + remove_vehicle(plate : str) : None
+  + remove_driver(driver_id : str) : None
+  + remove_trip(trip_id : str) : None
+  - _conflicts(trip : Trip) : list[Trip]
+}
+
+Serviceable <|.. Vehicle
+Vehicle <|-- Car
+Vehicle <|-- Truck
+Vehicle <|-- Bus
+
+Trip "0..*" --> "1" Driver : водій
+Trip "0..*" --> "1" Vehicle : авто
+
+FleetModel o-- "0..*" Vehicle
+FleetModel o-- "0..*" Driver
+FleetModel o-- "0..*" Trip
+@enduml

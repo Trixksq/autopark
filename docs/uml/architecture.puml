@@ -1,0 +1,172 @@
+' ШІ: Claude Code, Claude Opus 5.5 – діаграма класів шарів MVC (views, controllers, services, models), складена з коду станом на 2026-11-19.
+' Доменні класи тут показано без полів – повністю вони є на рисунку 2.1 (domain.puml).
+' Модулі без класів (json_storage, xml_report, logging_setup) показано стереотипом <<module>>: це набори функцій.
+@startuml architecture
+!pragma layout smetana
+skinparam classAttributeIconSize 0
+hide empty members
+title Рисунок 2.2 – Діаграма класів застосунку за шаблоном MVC
+
+package "views (Представлення)" {
+  class "ctk.CTk" as CTk <<CustomTkinter>>
+  class "ctk.CTkFrame" as CTkFrame <<CustomTkinter>>
+  class "ctk.CTkToplevel" as CTkToplevel <<CustomTkinter>>
+
+  class MainWindow {
+    - _controller : FleetController
+    - _report_rows : list[VehicleReport]
+    - _task_started : float
+    - _vehicles_table : TableFrame
+    - _drivers_table : TableFrame
+    - _trips_table : TableFrame
+    - _report_table : TableFrame
+    --
+    + MainWindow(controller : FleetController)
+    + refresh_all() : None
+    + refresh_vehicles() : None
+    - _on_open() / _on_save() / _on_export() / _on_calculate() : None
+    - _add_vehicle() / _edit_vehicle() / _delete_vehicle() : None
+    - _add_driver() / _edit_driver() / _delete_driver() : None
+    - _add_trip() / _delete_trip() : None
+    - _start_task(action, message : str) : None
+    - _poll_events() : None
+    - _finish_task(message : str) : None
+    - _show_report() : None
+  }
+
+  class TableFrame {
+    - _columns : tuple
+    - _rows : list[TableRow]
+    - _sort_index : int | None
+    - _reverse : bool
+    - _tree : ttk.Treeview
+    --
+    + TableFrame(master, columns : tuple)
+    + show(rows : list[TableRow]) : None
+    + selected_id() : str | None
+    - _on_heading(index : int) : None
+    - _redraw() : None
+  }
+
+  class TableRow <<dataclass, frozen>> {
+    + values : tuple
+    + sort_keys : tuple
+    + tags : tuple
+    + row_id : str
+  }
+
+  class FormDialog {
+    - _on_submit : Callable[[dict], None]
+    - _widgets : dict
+    - _error : ctk.CTkLabel
+    --
+    + FormDialog(master, title, fields, on_submit, initial=None, locked=())
+    + values() : dict
+    + «property» error_text : str
+    + submit() : None
+    + cancel() : None
+    - _make_modal() : None
+  }
+}
+
+package "controllers (Контролер)" {
+  class FleetController {
+    - _model : FleetModel
+    + events : queue.Queue
+    --
+    + FleetController(model : FleetModel)
+    + open_file_async(path) : Thread
+    + save_file_async(path) : Thread
+    + export_xml_async(path) : Thread
+    + calculate_async(workers : int) : Thread
+    + open_file(path) : None
+    + save_file(path) : None
+    + search_vehicles(text : str) : list[Vehicle]
+    + list_drivers() : tuple[Driver]
+    + list_trips() : tuple[Trip]
+    + get_vehicle(plate) : Vehicle
+    + get_driver(driver_id) : Driver
+    + add_vehicle(type_key, plate, brand, year, mileage, last_service) : Vehicle
+    + update_vehicle(plate, brand, year, mileage, last_service) : None
+    + delete_vehicle(plate) : None
+    + add_driver(driver_id, full_name, categories) : Driver
+    + update_driver(driver_id, full_name, categories) : None
+    + delete_driver(driver_id) : None
+    + add_trip(trip_id, driver_id, plate, start, end, distance) : Trip
+    + delete_trip(trip_id) : None
+    - _open_worker(path) : None
+    - _save_worker(path) : None
+    - _export_worker(path) : None
+    - _calculate_worker(workers : int) : None
+    - _report_progress(value : float) : None
+  }
+}
+
+package "services (Сервіси)" {
+  class json_storage <<module>> {
+    + VEHICLE_TYPES : dict
+    + load_fleet(path, progress=None) : tuple
+    + save_fleet(path, vehicles, drivers, trips) : None
+  }
+  class calculations <<module>> {
+    + split_into_chunks(items, chunk_count : int) : list
+    + summarize_chunk(trips : list) : dict
+    + calculate_report(vehicles, trips, today, workers=1, progress=None) : list[VehicleReport]
+  }
+  class VehicleReport <<dataclass, frozen>> {
+    + plate : str
+    + trips_count : int
+    + distance_km : float
+    + fuel_l : float
+    + next_service : date
+    + days_until_service : int
+  }
+  class xml_report <<module>> {
+    + build_mileage_report(rows, generated) : Element
+    + save_mileage_report(path, rows, generated) : None
+  }
+  class logging_setup <<module>> {
+    + setup_logging(path) : logging.Handler
+  }
+}
+
+package "models (Модель)" {
+  class FleetModel
+  abstract class Vehicle
+  class Driver
+  class Trip
+
+  class ValidationError
+  class DuplicateError
+  class NotFoundError
+  class TripConflictError
+  class StorageError
+  class Exception <<builtin>>
+}
+
+CTk <|-- MainWindow
+CTkFrame <|-- TableFrame
+CTkToplevel <|-- FormDialog
+
+MainWindow --> "1" FleetController : _controller
+MainWindow *-- "4" TableFrame
+MainWindow ..> FormDialog : <<create>>
+TableFrame o-- "0..*" TableRow
+
+FleetController --> "1" FleetModel : _model
+FleetController ..> json_storage : <<use>>
+FleetController ..> calculations : <<use>>
+FleetController ..> xml_report : <<use>>
+calculations ..> VehicleReport : <<create>>
+xml_report ..> VehicleReport : <<use>>
+
+FleetModel o-- "0..*" Vehicle
+FleetModel o-- "0..*" Driver
+FleetModel o-- "0..*" Trip
+
+Exception <|-- ValidationError
+Exception <|-- StorageError
+ValidationError <|-- DuplicateError
+ValidationError <|-- NotFoundError
+ValidationError <|-- TripConflictError
+@enduml

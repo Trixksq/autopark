@@ -1,0 +1,645 @@
+{
+  "vehicles": [
+    {
+      "type": "Car",
+      "plate": "АА0173ОВ",
+      "brand": "Renault",
+      "year": 2013,
+      "mileage": 146370,
+      "last_service": "2026-07-10"
+    },
+    {
+      "type": "Truck",
+      "plate": "АА6256КХ",
+      "brand": "Scania",
+      "year": 2013,
+      "mileage": 1662458,
+      "last_service": "2025-11-12"
+    },
+    {
+      "type": "Truck",
+      "plate": "КА1827НО",
+      "brand": "Volvo",
+      "year": 2008,
+      "mileage": 1365606,
+      "last_service": "2026-08-08"
+    },
+    {
+      "type": "Bus",
+      "plate": "ВС3175ІО",
+      "brand": "Setra",
+      "year": 2020,
+      "mileage": 409052,
+      "last_service": "2025-11-18"
+    },
+    {
+      "type": "Car",
+      "plate": "ВН1985СВ",
+      "brand": "Renault",
+      "year": 2013,
+      "mileage": 167118,
+      "last_service": "2026-06-14"
+    },
+    {
+      "type": "Car",
+      "plate": "КА6748ВН",
+      "brand": "Skoda",
+      "year": 2010,
+      "mileage": 288422,
+      "last_service": "2025-10-15"
+    },
+    {
+      "type": "Truck",
+      "plate": "ВС6335ММ",
+      "brand": "Scania",
+      "year": 2010,
+      "mileage": 1485341,
+      "last_service": "2026-06-03"
+    },
+    {
+      "type": "Truck",
+      "plate": "ВІ7774КМ",
+      "brand": "Iveco",
+      "year": 2008,
+      "mileage": 1748950,
+      "last_service": "2026-08-01"
+    },
+    {
+      "type": "Truck",
+      "plate": "АА8012РН",
+      "brand": "MAN",
+      "year": 2023,
+      "mileage": 456360,
+      "last_service": "2025-11-04"
+    },
+    {
+      "type": "Truck",
+      "plate": "АХ0340КН",
+      "brand": "Scania",
+      "year": 2017,
+      "mileage": 772710,
+      "last_service": "2026-09-26"
+    },
+    {
+      "type": "Truck",
+      "plate": "ВС3091АН",
+      "brand": "Volvo",
+      "year": 2014,
+      "mileage": 861237,
+      "last_service": "2026-04-01"
+    },
+    {
+      "type": "Truck",
+      "plate": "ВН3152ІХ",
+      "brand": "Iveco",
+      "year": 2008,
+      "mileage": 1770876,
+      "last_service": "2026-04-17"
+    },
+    {
+      "type": "Car",
+      "plate": "ВІ4121ВХ",
+      "brand": "Toyota",
+      "year": 2021,
+      "mileage": 60174,
+      "last_service": "2026-02-22"
+    },
+    {
+      "type": "Car",
+      "plate": "ВС4334ЕЕ",
+      "brand": "Renault",
+      "year": 2013,
+      "mileage": 206822,
+      "last_service": "2026-01-26"
+    },
+    {
+      "type": "Bus",
+      "plate": "ВН9193ХР",
+      "brand": "Mercedes-Benz",
+      "year": 2016,
+      "mileage": 806322,
+      "last_service": "2026-10-05"
+    },
+    {
+      "type": "Truck",
+      "plate": "ВІ8032КХ",
+      "brand": "Iveco",
+      "year": 2011,
+      "mileage": 1540528,
+      "last_service": "2026-08-27"
+    },
+    {
+      "type": "Car",
+      "plate": "ВС0516ЕХ",
+      "brand": "Volkswagen",
+      "year": 2020,
+      "mileage": 158711,
+      "last_service": "2026-03-10"
+    },
+    {
+      "type": "Bus",
+      "plate": "ВІ1691ВА",
+      "brand": "Mercedes-Benz",
+      "year": 2007,
+      "mileage": 1077280,
+      "last_service": "2026-03-23"
+    },
+    {
+      "type": "Truck",
+      "plate": "АХ2059НК",
+      "brand": "MAN",
+      "year": 2020,
+      "mileage": 537796,
+      "last_service": "2026-02-10"
+    },
+    {
+      "type": "Car",
+      "plate": "ВС6963ММ",
+      "brand": "Skoda",
+      "year": 2016,
+      "mileage": 136400,
+      "last_service": "2026-09-26"
+    }
+  ],
+  "drivers": [
+    {
+      "id": "D001",
+      "full_name": "Шевчук Андрій Іванович",
+      "categories": [
+        "B"
+      ]
+    },
+    {
+      "id": "D002",
+      "full_name": "Бондар Віктор Миколайович",
+      "categories": [
+        "B",
+        "C"
+      ]
+    },
+    {
+      "id": "D003",
+      "full_name": "Руденко Іван Миколайович",
+      "categories": [
+        "B",
+        "C"
+      ]
+    },
+    {
+      "id": "D004",
+      "full_name": "Ткаченко Юрій Андрійович",
+      "categories": [
+        "B",
+        "D"
+      ]
+    },
+    {
+      "id": "D005",
+      "full_name": "Павленко Віктор Іванович",
+      "categories": [
+        "B"
+      ]
+    },
+    {
+      "id": "D006",
+      "full_name": "Гончар Петро Іванович",
+      "categories": [
+        "B"
+      ]
+    },
+    {
+      "id": "D007",
+      "full_name": "Коваль Дмитро Іванович",
+      "categories": [
+        "B",
+        "C"
+      ]
+    },
+    {
+      "id": "D008",
+      "full_name": "Павленко Андрій Іванович",
+      "categories": [
+        "B",
+        "C"
+      ]
+    },
+    {
+      "id": "D009",
+      "full_name": "Ткаченко Іван Олегович",
+      "categories": [
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "id": "D010",
+      "full_name": "Лисенко Андрій Іванович",
+      "categories": [
+        "B",
+        "C"
+      ]
+    },
+    {
+      "id": "D011",
+      "full_name": "Савченко Юрій Петрович",
+      "categories": [
+        "B",
+        "C"
+      ]
+    },
+    {
+      "id": "D012",
+      "full_name": "Ткаченко Олег Андрійович",
+      "categories": [
+        "B",
+        "C"
+      ]
+    },
+    {
+      "id": "D013",
+      "full_name": "Лисенко Петро Іванович",
+      "categories": [
+        "B",
+        "D"
+      ]
+    },
+    {
+      "id": "D014",
+      "full_name": "Мороз Сергій Петрович",
+      "categories": [
+        "B"
+      ]
+    },
+    {
+      "id": "D015",
+      "full_name": "Мельник Олег Іванович",
+      "categories": [
+        "B",
+        "D"
+      ]
+    }
+  ],
+  "trips": [
+    {
+      "id": "T00001",
+      "driver_id": "D001",
+      "plate": "АА0173ОВ",
+      "start": "2026-01-05T09:00",
+      "end": "2026-01-05T17:00",
+      "distance_km": 472,
+      "fuel_l": 37.76
+    },
+    {
+      "id": "T00002",
+      "driver_id": "D002",
+      "plate": "АА6256КХ",
+      "start": "2026-01-05T08:00",
+      "end": "2026-01-05T15:00",
+      "distance_km": 476,
+      "fuel_l": 133.28
+    },
+    {
+      "id": "T00003",
+      "driver_id": "D003",
+      "plate": "КА1827НО",
+      "start": "2026-01-05T08:00",
+      "end": "2026-01-05T10:00",
+      "distance_km": 106,
+      "fuel_l": 29.68
+    },
+    {
+      "id": "T00004",
+      "driver_id": "D004",
+      "plate": "ВС3175ІО",
+      "start": "2026-01-05T07:00",
+      "end": "2026-01-05T13:00",
+      "distance_km": 378,
+      "fuel_l": 83.16
+    },
+    {
+      "id": "T00005",
+      "driver_id": "D005",
+      "plate": "ВН1985СВ",
+      "start": "2026-01-05T08:00",
+      "end": "2026-01-05T13:00",
+      "distance_km": 305,
+      "fuel_l": 24.4
+    },
+    {
+      "id": "T00006",
+      "driver_id": "D006",
+      "plate": "КА6748ВН",
+      "start": "2026-01-05T10:00",
+      "end": "2026-01-05T19:00",
+      "distance_km": 405,
+      "fuel_l": 32.4
+    },
+    {
+      "id": "T00007",
+      "driver_id": "D007",
+      "plate": "ВС6335ММ",
+      "start": "2026-01-05T06:00",
+      "end": "2026-01-05T15:00",
+      "distance_km": 495,
+      "fuel_l": 138.6
+    },
+    {
+      "id": "T00008",
+      "driver_id": "D008",
+      "plate": "ВІ7774КМ",
+      "start": "2026-01-05T10:00",
+      "end": "2026-01-05T18:00",
+      "distance_km": 560,
+      "fuel_l": 156.8
+    },
+    {
+      "id": "T00009",
+      "driver_id": "D009",
+      "plate": "АА8012РН",
+      "start": "2026-01-05T10:00",
+      "end": "2026-01-05T18:00",
+      "distance_km": 424,
+      "fuel_l": 118.72
+    },
+    {
+      "id": "T00010",
+      "driver_id": "D010",
+      "plate": "АХ0340КН",
+      "start": "2026-01-05T09:00",
+      "end": "2026-01-05T14:00",
+      "distance_km": 350,
+      "fuel_l": 98.0
+    },
+    {
+      "id": "T00011",
+      "driver_id": "D011",
+      "plate": "ВС3091АН",
+      "start": "2026-01-05T06:00",
+      "end": "2026-01-05T14:00",
+      "distance_km": 536,
+      "fuel_l": 150.08
+    },
+    {
+      "id": "T00012",
+      "driver_id": "D012",
+      "plate": "ВН3152ІХ",
+      "start": "2026-01-05T09:00",
+      "end": "2026-01-05T14:00",
+      "distance_km": 285,
+      "fuel_l": 79.8
+    },
+    {
+      "id": "T00013",
+      "driver_id": "D013",
+      "plate": "ВІ4121ВХ",
+      "start": "2026-01-05T10:00",
+      "end": "2026-01-05T13:00",
+      "distance_km": 207,
+      "fuel_l": 16.56
+    },
+    {
+      "id": "T00014",
+      "driver_id": "D014",
+      "plate": "ВС4334ЕЕ",
+      "start": "2026-01-05T07:00",
+      "end": "2026-01-05T12:00",
+      "distance_km": 255,
+      "fuel_l": 20.4
+    },
+    {
+      "id": "T00015",
+      "driver_id": "D015",
+      "plate": "ВН9193ХР",
+      "start": "2026-01-05T08:00",
+      "end": "2026-01-05T11:00",
+      "distance_km": 156,
+      "fuel_l": 34.32
+    },
+    {
+      "id": "T00016",
+      "driver_id": "D001",
+      "plate": "АА0173ОВ",
+      "start": "2026-01-06T06:00",
+      "end": "2026-01-06T15:00",
+      "distance_km": 594,
+      "fuel_l": 47.52
+    },
+    {
+      "id": "T00017",
+      "driver_id": "D002",
+      "plate": "АА6256КХ",
+      "start": "2026-01-06T10:00",
+      "end": "2026-01-06T12:00",
+      "distance_km": 90,
+      "fuel_l": 25.2
+    },
+    {
+      "id": "T00018",
+      "driver_id": "D003",
+      "plate": "КА1827НО",
+      "start": "2026-01-06T07:00",
+      "end": "2026-01-06T13:00",
+      "distance_km": 414,
+      "fuel_l": 115.92
+    },
+    {
+      "id": "T00019",
+      "driver_id": "D004",
+      "plate": "ВС3175ІО",
+      "start": "2026-01-06T09:00",
+      "end": "2026-01-06T18:00",
+      "distance_km": 468,
+      "fuel_l": 102.96
+    },
+    {
+      "id": "T00020",
+      "driver_id": "D005",
+      "plate": "ВН1985СВ",
+      "start": "2026-01-06T06:00",
+      "end": "2026-01-06T09:00",
+      "distance_km": 201,
+      "fuel_l": 16.08
+    },
+    {
+      "id": "T00021",
+      "driver_id": "D006",
+      "plate": "КА6748ВН",
+      "start": "2026-01-06T07:00",
+      "end": "2026-01-06T14:00",
+      "distance_km": 413,
+      "fuel_l": 33.04
+    },
+    {
+      "id": "T00022",
+      "driver_id": "D007",
+      "plate": "ВС6335ММ",
+      "start": "2026-01-06T07:00",
+      "end": "2026-01-06T15:00",
+      "distance_km": 384,
+      "fuel_l": 107.52
+    },
+    {
+      "id": "T00023",
+      "driver_id": "D008",
+      "plate": "ВІ7774КМ",
+      "start": "2026-01-06T10:00",
+      "end": "2026-01-06T17:00",
+      "distance_km": 420,
+      "fuel_l": 117.6
+    },
+    {
+      "id": "T00024",
+      "driver_id": "D009",
+      "plate": "АА8012РН",
+      "start": "2026-01-06T07:00",
+      "end": "2026-01-06T14:00",
+      "distance_km": 385,
+      "fuel_l": 107.8
+    },
+    {
+      "id": "T00025",
+      "driver_id": "D010",
+      "plate": "АХ0340КН",
+      "start": "2026-01-06T09:00",
+      "end": "2026-01-06T15:00",
+      "distance_km": 276,
+      "fuel_l": 77.28
+    },
+    {
+      "id": "T00026",
+      "driver_id": "D011",
+      "plate": "ВС3091АН",
+      "start": "2026-01-06T07:00",
+      "end": "2026-01-06T16:00",
+      "distance_km": 441,
+      "fuel_l": 123.48
+    },
+    {
+      "id": "T00027",
+      "driver_id": "D012",
+      "plate": "ВН3152ІХ",
+      "start": "2026-01-06T08:00",
+      "end": "2026-01-06T17:00",
+      "distance_km": 486,
+      "fuel_l": 136.08
+    },
+    {
+      "id": "T00028",
+      "driver_id": "D013",
+      "plate": "ВІ4121ВХ",
+      "start": "2026-01-06T10:00",
+      "end": "2026-01-06T12:00",
+      "distance_km": 98,
+      "fuel_l": 7.84
+    },
+    {
+      "id": "T00029",
+      "driver_id": "D014",
+      "plate": "ВС4334ЕЕ",
+      "start": "2026-01-06T06:00",
+      "end": "2026-01-06T08:00",
+      "distance_km": 132,
+      "fuel_l": 10.56
+    },
+    {
+      "id": "T00030",
+      "driver_id": "D015",
+      "plate": "ВН9193ХР",
+      "start": "2026-01-06T08:00",
+      "end": "2026-01-06T17:00",
+      "distance_km": 504,
+      "fuel_l": 110.88
+    },
+    {
+      "id": "T00031",
+      "driver_id": "D001",
+      "plate": "АА0173ОВ",
+      "start": "2026-01-07T08:00",
+      "end": "2026-01-07T15:00",
+      "distance_km": 462,
+      "fuel_l": 36.96
+    },
+    {
+      "id": "T00032",
+      "driver_id": "D002",
+      "plate": "АА6256КХ",
+      "start": "2026-01-07T07:00",
+      "end": "2026-01-07T11:00",
+      "distance_km": 280,
+      "fuel_l": 78.4
+    },
+    {
+      "id": "T00033",
+      "driver_id": "D003",
+      "plate": "КА1827НО",
+      "start": "2026-01-07T06:00",
+      "end": "2026-01-07T11:00",
+      "distance_km": 305,
+      "fuel_l": 85.4
+    },
+    {
+      "id": "T00034",
+      "driver_id": "D004",
+      "plate": "ВС3175ІО",
+      "start": "2026-01-07T06:00",
+      "end": "2026-01-07T10:00",
+      "distance_km": 252,
+      "fuel_l": 55.44
+    },
+    {
+      "id": "T00035",
+      "driver_id": "D005",
+      "plate": "ВН1985СВ",
+      "start": "2026-01-07T07:00",
+      "end": "2026-01-07T13:00",
+      "distance_km": 342,
+      "fuel_l": 27.36
+    },
+    {
+      "id": "T00036",
+      "driver_id": "D006",
+      "plate": "КА6748ВН",
+      "start": "2026-01-07T10:00",
+      "end": "2026-01-07T19:00",
+      "distance_km": 576,
+      "fuel_l": 46.08
+    },
+    {
+      "id": "T00037",
+      "driver_id": "D007",
+      "plate": "ВС6335ММ",
+      "start": "2026-01-07T08:00",
+      "end": "2026-01-07T12:00",
+      "distance_km": 224,
+      "fuel_l": 62.72
+    },
+    {
+      "id": "T00038",
+      "driver_id": "D008",
+      "plate": "ВІ7774КМ",
+      "start": "2026-01-07T07:00",
+      "end": "2026-01-07T14:00",
+      "distance_km": 385,
+      "fuel_l": 107.8
+    },
+    {
+      "id": "T00039",
+      "driver_id": "D009",
+      "plate": "АА8012РН",
+      "start": "2026-01-07T10:00",
+      "end": "2026-01-07T18:00",
+      "distance_km": 384,
+      "fuel_l": 107.52
+    },
+    {
+      "id": "T00040",
+      "driver_id": "D010",
+      "plate": "АХ0340КН",
+      "start": "2026-01-07T06:00",
+      "end": "2026-01-07T08:00",
+      "distance_km": 108,
+      "fuel_l": 30.24
+    }
+  ]
+}
