@@ -22,6 +22,9 @@
 | 15 | Claude Code, Claude Opus 5.5 | `services/logging_setup.py` (каркас), `tests/test_logging.py` | Журнал у файл `logs/fleet.log` із назвою потоку | Пропуски й записи журналу в контролері написав автор. Перевірено тестами |
 | 16 | Claude Code, Claude Opus 5.5 | Код-рев'ю всього проєкту | Уточнено повідомлення про помилки, записи журналу, docstring, порядок імпортів; виправлено нестабільний тест форми (`gc.collect()`) | Без змін. Перевірено: 160 тестів OK тричі поспіль |
 | 17 | Claude Code, Claude Opus 5.5 | `docs/uml/*`, `docs/flowcharts/*`, `docs/screenshots/*.png`, `docs/test_scenarios.md` | UML-діаграми класів і дві блок-схеми за кодом; скриншоти інтерфейсу; перелік сценаріїв тестування з очікуваними результатами | Без змін. Фактичні результати сценаріїв і скриншоти тестування (`docs/screenshots/testing`) зробив автор |
+| 18 | Claude Code, Claude Opus 5.5 | `find_trip`, `update_trip` у `models/fleet.py`; `get_trip`, `update_trip` у `controllers/fleet_controller.py`; `_edit_trip` у `views/main_window.py`; `tests/test_trip_update.py` (11), `tests/test_search_and_period.py` (14) | Редагування поїздки (код повністю згенеровано ШІ) і тести; підказки до пошуку за маркою | Без змін. Перевірено тестами `test_trip_update`: 11 OK |
+| 19 | Claude Code, Claude Opus 5.5 | `filter_trips_by_period` у `services/calculations.py`; період у `services/xml_report.py`; `parse_period` і період у `export_xml_async` у `controllers/fleet_controller.py`; форма періоду в `views/main_window.py` | XML-звіт за період (код повністю згенеровано ШІ) | Без змін. Перевірено тестами `test_search_and_period` (14) і запуском вікна |
+| 20 | Claude Code, Claude Opus 5.5 | Пояснювальна записка | Копія шаблону із заповненим титулом, завданням і шифром; пошук аналогів (Fleetio, Odoo Fleet, Wialon) і чернетка таблиці порівняння; план вступу | Таблицю аналогів автор звіряє на сайтах виробників; текст вступу пише автор |
 
 ## Ключові запити
 

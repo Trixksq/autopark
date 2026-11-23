@@ -5,13 +5,19 @@ import xml.etree.ElementTree as ET
 from models.exceptions import StorageError
 
 
-def build_mileage_report(rows, generated) -> ET.Element:
-    """Будує дерево XML зі списку VehicleReport; generated – дата звіту."""
+def build_mileage_report(rows, generated, date_from=None, date_to=None) -> ET.Element:
+    """Будує дерево XML зі списку VehicleReport; generated – дата звіту, date_from/date_to – період."""
     root = ET.Element("mileage_report",
                       date=generated.isoformat(),
                       vehicles=str(len(rows)),
                       total_km=f"{sum(r.distance_km for r in rows):.1f}",
                       total_fuel_l=f"{sum(r.fuel_l for r in rows):.2f}")
+    # ШІ: Claude Code, Claude Opus 5.5 – атрибути періоду.
+    # Змінено: без змін.
+    if date_from is not None:
+        root.set("period_from", date_from.isoformat())
+    if date_to is not None:
+        root.set("period_to", date_to.isoformat())
     for r in rows:
         vehicle = ET.SubElement(root, "vehicle", plate=r.plate,
                                 service_due="true" if r.days_until_service <= 0 else "false")
@@ -23,9 +29,9 @@ def build_mileage_report(rows, generated) -> ET.Element:
     return root
 
 
-def save_mileage_report(path, rows, generated) -> None:
+def save_mileage_report(path, rows, generated, date_from=None, date_to=None) -> None:
     """Записує звіт у файл UTF-8; помилку файлової системи перетворює на StorageError."""
-    tree = ET.ElementTree(build_mileage_report(rows, generated))
+    tree = ET.ElementTree(build_mileage_report(rows, generated, date_from, date_to))
     ET.indent(tree)
     try:
         tree.write(path, encoding="utf-8", xml_declaration=True)

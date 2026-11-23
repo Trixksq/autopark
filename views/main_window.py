@@ -50,6 +50,7 @@ TRIP_FIELDS = (
     ("id", "ID"), ("driver", "ID водія"), ("plate", "Номер авто"),
     ("start", "Початок (ДД.ММ.РРРР ГГ:ХХ)"), ("end", "Кінець (ДД.ММ.РРРР ГГ:ХХ)"), ("km", "Відстань, км"),
 )
+PERIOD_FIELDS = (("from", "Від (ДД.ММ.РРРР або порожньо)"), ("to", "До (ДД.ММ.РРРР або порожньо)"))
 TYPE_KEYS = {name: key for key, name in TYPE_NAMES.items()}  # «Легковий» → «Car»
 
 
@@ -97,7 +98,7 @@ class MainWindow(ctk.CTk):
     def _build_vehicles_tab(self, tab) -> None:
         bar = ctk.CTkFrame(tab, fg_color="transparent")
         bar.pack(fill="x", pady=(0, 5))
-        self._search = ctk.CTkEntry(bar, placeholder_text="Пошук за номером", width=220)
+        self._search = ctk.CTkEntry(bar, placeholder_text="Пошук за номером або маркою", width=220)
         self._search.pack(side="left", padx=5)
         self._search.bind("<KeyRelease>", lambda _event: self.refresh_vehicles())
         self._type_filter = ctk.CTkOptionMenu(bar, values=[ALL_TYPES, *TYPE_NAMES.values()],
@@ -119,17 +120,16 @@ class MainWindow(ctk.CTk):
     def _build_trips_tab(self, tab) -> None:
         bar = ctk.CTkFrame(tab, fg_color="transparent")
         bar.pack(fill="x", pady=(0, 5))
-        self._add_crud_buttons(bar, self._add_trip, None, self._delete_trip)  # поїздка незмінна: без «Змінити»
+        self._add_crud_buttons(bar, self._add_trip, self._edit_trip, self._delete_trip)
         self._trips_status = ctk.CTkLabel(bar, text="", anchor="w")
         self._trips_status.pack(side="right", padx=10)
         self._trips_table = TableFrame(tab, TRIP_COLUMNS)
         self._trips_table.pack(fill="both", expand=True)
 
     def _add_crud_buttons(self, bar, on_add, on_edit, on_delete) -> None:
-        """Кнопки «Додати», «Змінити», «Видалити»; кнопку з command=None не створюємо."""
+        """Кнопки «Додати», «Змінити», «Видалити»."""
         for text, command in (("Додати", on_add), ("Змінити", on_edit), ("Видалити", on_delete)):
-            if command is not None:
-                ctk.CTkButton(bar, text=text, width=90, command=command).pack(side="left", padx=3)
+            ctk.CTkButton(bar, text=text, width=90, command=command).pack(side="left", padx=3)
 
     def _build_report_tab(self, tab) -> None:
         bar = ctk.CTkFrame(tab, fg_color="transparent")
@@ -286,6 +286,20 @@ class MainWindow(ctk.CTk):
 
         FormDialog(self, "Нова поїздка", TRIP_FIELDS, save)
 
+    def _edit_trip(self) -> None:
+        trip_id = self._selected(self._trips_table, "Змінити")
+        if trip_id is None:
+            return
+        trip = self._controller.get_trip(trip_id)
+        initial = {"id": trip.trip_id, "driver": trip.driver.driver_id, "plate": trip.vehicle.plate,
+                   "start": trip.start.strftime(DATETIME_FORMAT), "end": trip.end.strftime(DATETIME_FORMAT),
+                   "km": str(trip.distance_km)}
+
+        def save(v: dict) -> None:
+            self._controller.update_trip(trip_id, v["driver"], v["plate"], v["start"], v["end"], v["km"])
+            self.refresh_all()
+        FormDialog(self, f"Поїздка {trip_id}", TRIP_FIELDS, save, initial=initial, locked=("id",))
+
     def _delete_trip(self) -> None:
         trip_id = self._selected(self._trips_table, "Видалити")
         if trip_id is not None:
@@ -305,10 +319,14 @@ class MainWindow(ctk.CTk):
             self._start_task(lambda: self._controller.save_file_async(path), "Збереження…")
 
     def _on_export(self) -> None:
-        path = filedialog.asksaveasfilename(title="Зберегти звіт", defaultextension=".xml",
-                                            filetypes=[("XML", "*.xml")])
-        if path:
-            self._start_task(lambda: self._controller.export_xml_async(path), "Формування звіту…")
+        def save(v: dict) -> None:
+            self._controller.parse_period(v["from"], v["to"])  # помилку дати показати до вибору файлу
+            path = filedialog.asksaveasfilename(title="Зберегти звіт", defaultextension=".xml",
+                                                filetypes=[("XML", "*.xml")])
+            if path:
+                self._start_task(lambda: self._controller.export_xml_async(path, v["from"], v["to"]),
+                                 "Формування звіту…")
+        FormDialog(self, "Період звіту", PERIOD_FIELDS, save)
 
     def _on_calculate(self) -> None:
         workers = int(self._workers.get())

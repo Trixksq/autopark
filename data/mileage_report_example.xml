@@ -1,143 +1,143 @@
 <?xml version='1.0' encoding='utf-8'?>
-<mileage_report date="2026-11-20" vehicles="20" total_km="14034.0" total_fuel_l="2931.64">
+<mileage_report date="2026-11-23" vehicles="20" total_km="10716.0" total_fuel_l="2293.72" period_from="2026-01-05" period_to="2026-01-06">
   <vehicle plate="АА0173ОВ" service_due="false">
-    <trips>3</trips>
-    <distance_km>1528.0</distance_km>
-    <fuel_l>122.24</fuel_l>
+    <trips>2</trips>
+    <distance_km>1066.0</distance_km>
+    <fuel_l>85.28</fuel_l>
     <next_service>2027-07-10</next_service>
-    <days_until_service>232</days_until_service>
+    <days_until_service>229</days_until_service>
   </vehicle>
   <vehicle plate="АА6256КХ" service_due="true">
-    <trips>3</trips>
-    <distance_km>846.0</distance_km>
-    <fuel_l>236.88</fuel_l>
+    <trips>2</trips>
+    <distance_km>566.0</distance_km>
+    <fuel_l>158.48</fuel_l>
     <next_service>2026-05-11</next_service>
-    <days_until_service>-193</days_until_service>
+    <days_until_service>-196</days_until_service>
   </vehicle>
   <vehicle plate="КА1827НО" service_due="false">
-    <trips>3</trips>
-    <distance_km>825.0</distance_km>
-    <fuel_l>231.00</fuel_l>
+    <trips>2</trips>
+    <distance_km>520.0</distance_km>
+    <fuel_l>145.60</fuel_l>
     <next_service>2027-02-04</next_service>
-    <days_until_service>76</days_until_service>
+    <days_until_service>73</days_until_service>
   </vehicle>
   <vehicle plate="ВС3175ІО" service_due="true">
-    <trips>3</trips>
-    <distance_km>1098.0</distance_km>
-    <fuel_l>241.56</fuel_l>
+    <trips>2</trips>
+    <distance_km>846.0</distance_km>
+    <fuel_l>186.12</fuel_l>
     <next_service>2026-03-18</next_service>
-    <days_until_service>-247</days_until_service>
+    <days_until_service>-250</days_until_service>
   </vehicle>
   <vehicle plate="ВН1985СВ" service_due="false">
-    <trips>3</trips>
-    <distance_km>848.0</distance_km>
-    <fuel_l>67.84</fuel_l>
+    <trips>2</trips>
+    <distance_km>506.0</distance_km>
+    <fuel_l>40.48</fuel_l>
     <next_service>2027-06-14</next_service>
-    <days_until_service>206</days_until_service>
+    <days_until_service>203</days_until_service>
   </vehicle>
   <vehicle plate="КА6748ВН" service_due="true">
-    <trips>3</trips>
-    <distance_km>1394.0</distance_km>
-    <fuel_l>111.52</fuel_l>
+    <trips>2</trips>
+    <distance_km>818.0</distance_km>
+    <fuel_l>65.44</fuel_l>
     <next_service>2026-10-15</next_service>
-    <days_until_service>-36</days_until_service>
+    <days_until_service>-39</days_until_service>
   </vehicle>
   <vehicle plate="ВС6335ММ" service_due="false">
-    <trips>3</trips>
-    <distance_km>1103.0</distance_km>
-    <fuel_l>308.84</fuel_l>
+    <trips>2</trips>
+    <distance_km>879.0</distance_km>
+    <fuel_l>246.12</fuel_l>
     <next_service>2026-11-30</next_service>
-    <days_until_service>10</days_until_service>
+    <days_until_service>7</days_until_service>
   </vehicle>
   <vehicle plate="ВІ7774КМ" service_due="false">
-    <trips>3</trips>
-    <distance_km>1365.0</distance_km>
-    <fuel_l>382.20</fuel_l>
+    <trips>2</trips>
+    <distance_km>980.0</distance_km>
+    <fuel_l>274.40</fuel_l>
     <next_service>2027-01-28</next_service>
-    <days_until_service>69</days_until_service>
+    <days_until_service>66</days_until_service>
   </vehicle>
   <vehicle plate="АА8012РН" service_due="true">
-    <trips>3</trips>
-    <distance_km>1193.0</distance_km>
-    <fuel_l>334.04</fuel_l>
+    <trips>2</trips>
+    <distance_km>809.0</distance_km>
+    <fuel_l>226.52</fuel_l>
     <next_service>2026-05-03</next_service>
-    <days_until_service>-201</days_until_service>
+    <days_until_service>-204</days_until_service>
   </vehicle>
   <vehicle plate="АХ0340КН" service_due="false">
-    <trips>3</trips>
-    <distance_km>734.0</distance_km>
-    <fuel_l>205.52</fuel_l>
+    <trips>2</trips>
+    <distance_km>626.0</distance_km>
+    <fuel_l>175.28</fuel_l>
     <next_service>2027-03-25</next_service>
-    <days_until_service>125</days_until_service>
+    <days_until_service>122</days_until_service>
   </vehicle>
   <vehicle plate="ВС3091АН" service_due="true">
     <trips>2</trips>
     <distance_km>977.0</distance_km>
     <fuel_l>273.56</fuel_l>
     <next_service>2026-09-28</next_service>
-    <days_until_service>-53</days_until_service>
+    <days_until_service>-56</days_until_service>
   </vehicle>
   <vehicle plate="ВН3152ІХ" service_due="true">
     <trips>2</trips>
     <distance_km>771.0</distance_km>
     <fuel_l>215.88</fuel_l>
     <next_service>2026-10-14</next_service>
-    <days_until_service>-37</days_until_service>
+    <days_until_service>-40</days_until_service>
   </vehicle>
   <vehicle plate="ВІ4121ВХ" service_due="false">
     <trips>2</trips>
     <distance_km>305.0</distance_km>
     <fuel_l>24.40</fuel_l>
     <next_service>2027-02-22</next_service>
-    <days_until_service>94</days_until_service>
+    <days_until_service>91</days_until_service>
   </vehicle>
   <vehicle plate="ВС4334ЕЕ" service_due="false">
     <trips>2</trips>
     <distance_km>387.0</distance_km>
     <fuel_l>30.96</fuel_l>
     <next_service>2027-01-26</next_service>
-    <days_until_service>67</days_until_service>
+    <days_until_service>64</days_until_service>
   </vehicle>
   <vehicle plate="ВН9193ХР" service_due="false">
     <trips>2</trips>
     <distance_km>660.0</distance_km>
     <fuel_l>145.20</fuel_l>
     <next_service>2027-02-02</next_service>
-    <days_until_service>74</days_until_service>
+    <days_until_service>71</days_until_service>
   </vehicle>
   <vehicle plate="ВІ8032КХ" service_due="false">
     <trips>0</trips>
     <distance_km>0.0</distance_km>
     <fuel_l>0.00</fuel_l>
     <next_service>2027-02-23</next_service>
-    <days_until_service>95</days_until_service>
+    <days_until_service>92</days_until_service>
   </vehicle>
   <vehicle plate="ВС0516ЕХ" service_due="false">
     <trips>0</trips>
     <distance_km>0.0</distance_km>
     <fuel_l>0.00</fuel_l>
     <next_service>2027-03-10</next_service>
-    <days_until_service>110</days_until_service>
+    <days_until_service>107</days_until_service>
   </vehicle>
   <vehicle plate="ВІ1691ВА" service_due="true">
     <trips>0</trips>
     <distance_km>0.0</distance_km>
     <fuel_l>0.00</fuel_l>
     <next_service>2026-07-21</next_service>
-    <days_until_service>-122</days_until_service>
+    <days_until_service>-125</days_until_service>
   </vehicle>
   <vehicle plate="АХ2059НК" service_due="true">
     <trips>0</trips>
     <distance_km>0.0</distance_km>
     <fuel_l>0.00</fuel_l>
     <next_service>2026-08-09</next_service>
-    <days_until_service>-103</days_until_service>
+    <days_until_service>-106</days_until_service>
   </vehicle>
   <vehicle plate="ВС6963ММ" service_due="false">
     <trips>0</trips>
     <distance_km>0.0</distance_km>
     <fuel_l>0.00</fuel_l>
     <next_service>2027-09-26</next_service>
-    <days_until_service>310</days_until_service>
+    <days_until_service>307</days_until_service>
   </vehicle>
 </mileage_report>

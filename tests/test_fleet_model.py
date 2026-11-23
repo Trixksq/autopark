@@ -57,16 +57,16 @@ class FleetModelSearchTests(unittest.TestCase):
             self.model.add_vehicle(vehicle)
 
     def test_find_by_part_of_plate(self):
-        self.assertEqual(self.model.find_by_plate("1234"), [self.truck])
+        self.assertEqual(self.model.find_vehicles("1234"), [self.truck])
 
     def test_find_ignores_case_and_spaces(self):
-        self.assertEqual(self.model.find_by_plate("  вн12 "), [self.truck])
+        self.assertEqual(self.model.find_vehicles("  вн12 "), [self.truck])
 
     def test_empty_query_returns_all(self):
-        self.assertEqual(self.model.find_by_plate(""), [self.truck, self.car])
+        self.assertEqual(self.model.find_vehicles(""), [self.truck, self.car])
 
     def test_no_match_returns_empty_list(self):
-        self.assertEqual(self.model.find_by_plate("9999"), [])
+        self.assertEqual(self.model.find_vehicles("9999"), [])
 
 
 if __name__ == "__main__":

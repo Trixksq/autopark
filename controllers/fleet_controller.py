@@ -9,7 +9,7 @@ from models.driver import Driver
 from models.exceptions import StorageError, ValidationError
 from models.fleet import FleetModel
 from models.trip import Trip
-from services.calculations import calculate_report
+from services.calculations import calculate_report, filter_trips_by_period
 from services.json_storage import VEHICLE_TYPES, load_fleet, save_fleet
 from services.xml_report import save_mileage_report
 
@@ -74,8 +74,8 @@ class FleetController:
         self._model.replace_all(*load_fleet(path))
 
     def search_vehicles(self, text: str) -> list:
-        """Авто, у номері яких є text."""
-        return self._model.find_by_plate(text)
+        """Авто, у номері або марці яких є text."""
+        return self._model.find_vehicles(text)
 
     def save_file(self, path) -> None:
         """Синхронно зберігає набір у JSON."""
@@ -209,8 +209,22 @@ class FleetController:
         logger.info("Додано поїздку %s", trip.trip_id)
         return trip
 
+    # ШІ: Claude Code, Claude Opus 5.5 – методи get_trip і update_trip (редагування поїздки).
+    # Змінено: без змін.
+    def get_trip(self, trip_id):
+        """Поїздка за ID (для форми редагування)."""
+        return self._model.find_trip(trip_id)
+
+    def update_trip(self, trip_id, driver_id, plate, start, end, distance):
+        """Створює нову незмінну поїздку з рядків форми і ставить її на місце старої."""
+        trip = Trip(trip_id, self._model.find_driver(driver_id), self._model.find_vehicle(plate),
+                    _parse_datetime(start), _parse_datetime(end), _parse_float(distance, "Відстань"))
+        self._model.update_trip(trip)
+        logger.info("Відредаговано поїздку %s", trip.trip_id)
+        return trip
+
     def delete_trip(self, trip_id) -> None:
-        """Видаляє поїздку (поїздки незмінні: щоб змінити, видаляють і додають заново)."""
+        """Видаляє поїздку."""
         self._model.remove_trip(trip_id)
         logger.info("Видалено поїздку %s", trip_id)
 
@@ -223,19 +237,32 @@ class FleetController:
         """Водій за ID (для форми редагування)."""
         return self._model.find_driver(driver_id)
 
-    # ШІ: Claude Code, Claude Opus 5.5 – каркас export_xml_async/_export_worker з пропусками; пропуски заповнив автор.
-    def export_xml_async(self, path) -> threading.Thread:
-        """Запускає формування XML-звіту про пробіг у фоновому потоці."""
-        thread = threading.Thread(target=self._export_worker, args=(path,), daemon=True)
+    # ШІ: Claude Code, Claude Opus 5.5 – метод parse_period (період звіту).
+    # Змінено: без змін.
+    @staticmethod
+    def parse_period(date_from: str, date_to: str) -> tuple:
+        """Розбирає межі періоду з рядків форми; порожній рядок – межі немає (None)."""
+        start = _parse_date(date_from) if date_from.strip() else None
+        end = _parse_date(date_to) if date_to.strip() else None
+        if start is not None and end is not None and start > end:
+            raise ValidationError("Початок періоду має бути не пізніше за кінець.")
+        return start, end
+
+    # ШІ: Claude Code, Claude Opus 5.5 – каркас export_xml_async/_export_worker з пропусками; пропуски заповнив автор. Період додав ШІ.
+    def export_xml_async(self, path, date_from="", date_to="") -> threading.Thread:
+        """Запускає формування XML-звіту про пробіг за період у фоновому потоці."""
+        start, end = self.parse_period(date_from, date_to)
+        thread = threading.Thread(target=self._export_worker, args=(path, start, end), daemon=True)
         thread.start()
         return thread
 
-    def _export_worker(self, path) -> None:
-        """У фоновому потоці рахує звіт і записує його в XML."""
+    def _export_worker(self, path, start, end) -> None:
+        """У фоновому потоці рахує звіт за період і записує його в XML."""
         try:
-            rows = calculate_report(self._model.vehicles, self._model.trips, date.today(),
+            trips = filter_trips_by_period(self._model.trips, start, end)
+            rows = calculate_report(self._model.vehicles, trips, date.today(),
                                     progress=self._report_progress)
-            save_mileage_report(path, rows, date.today())
+            save_mileage_report(path, rows, date.today(), start, end)
             logger.info("Експортовано звіт %s: %d авто", path, len(rows))
             self.events.put(("done", f"Звіт збережено: {len(rows)} авто."))
         except (StorageError, ValidationError) as error:

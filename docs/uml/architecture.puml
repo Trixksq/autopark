@@ -27,7 +27,7 @@ package "views (Представлення)" {
     - _on_open() / _on_save() / _on_export() / _on_calculate() : None
     - _add_vehicle() / _edit_vehicle() / _delete_vehicle() : None
     - _add_driver() / _edit_driver() / _delete_driver() : None
-    - _add_trip() / _delete_trip() : None
+    - _add_trip() / _edit_trip() / _delete_trip() : None
     - _start_task(action, message : str) : None
     - _poll_events() : None
     - _finish_task(message : str) : None
@@ -77,7 +77,7 @@ package "controllers (Контролер)" {
     + FleetController(model : FleetModel)
     + open_file_async(path) : Thread
     + save_file_async(path) : Thread
-    + export_xml_async(path) : Thread
+    + export_xml_async(path, date_from, date_to) : Thread
     + calculate_async(workers : int) : Thread
     + open_file(path) : None
     + save_file(path) : None
@@ -86,6 +86,8 @@ package "controllers (Контролер)" {
     + list_trips() : tuple[Trip]
     + get_vehicle(plate) : Vehicle
     + get_driver(driver_id) : Driver
+    + get_trip(trip_id) : Trip
+    + {static} parse_period(date_from : str, date_to : str) : tuple
     + add_vehicle(type_key, plate, brand, year, mileage, last_service) : Vehicle
     + update_vehicle(plate, brand, year, mileage, last_service) : None
     + delete_vehicle(plate) : None
@@ -93,10 +95,11 @@ package "controllers (Контролер)" {
     + update_driver(driver_id, full_name, categories) : None
     + delete_driver(driver_id) : None
     + add_trip(trip_id, driver_id, plate, start, end, distance) : Trip
+    + update_trip(trip_id, driver_id, plate, start, end, distance) : Trip
     + delete_trip(trip_id) : None
     - _open_worker(path) : None
     - _save_worker(path) : None
-    - _export_worker(path) : None
+    - _export_worker(path, start, end) : None
     - _calculate_worker(workers : int) : None
     - _report_progress(value : float) : None
   }
@@ -105,10 +108,14 @@ package "controllers (Контролер)" {
 package "services (Сервіси)" {
   class json_storage <<module>> {
     + VEHICLE_TYPES : dict
+    + vehicle_from_dict(data) / vehicle_to_dict(vehicle)
+    + driver_from_dict(data) / driver_to_dict(driver)
+    + trip_from_dict(data, drivers, vehicles) / trip_to_dict(trip)
     + load_fleet(path, progress=None) : tuple
     + save_fleet(path, vehicles, drivers, trips) : None
   }
   class calculations <<module>> {
+    + filter_trips_by_period(trips, date_from, date_to) : list
     + split_into_chunks(items, chunk_count : int) : list
     + summarize_chunk(trips : list) : dict
     + calculate_report(vehicles, trips, today, workers=1, progress=None) : list[VehicleReport]
@@ -122,8 +129,8 @@ package "services (Сервіси)" {
     + days_until_service : int
   }
   class xml_report <<module>> {
-    + build_mileage_report(rows, generated) : Element
-    + save_mileage_report(path, rows, generated) : None
+    + build_mileage_report(rows, generated, date_from=None, date_to=None) : Element
+    + save_mileage_report(path, rows, generated, date_from=None, date_to=None) : None
   }
   class logging_setup <<module>> {
     + setup_logging(path) : logging.Handler

@@ -15,6 +15,21 @@ class VehicleReport:
     days_until_service: int
 
 
+# ШІ: Claude Code, Claude Opus 5.5 – функція filter_trips_by_period (період звіту).
+# Змінено: без змін.
+def filter_trips_by_period(trips, date_from, date_to) -> list:
+    """Поїздки, що почалися в період [date_from; date_to] включно; None – межі немає."""
+    result = []
+    for trip in trips:
+        day = trip.start.date()
+        if date_from is not None and day < date_from:
+            continue
+        if date_to is not None and day > date_to:
+            continue
+        result.append(trip)
+    return result
+
+
 def split_into_chunks(items, chunk_count: int) -> list:
     """Ділить список на chunk_count частин майже однакового розміру, зберігаючи порядок."""
     if chunk_count < 1:

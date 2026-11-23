@@ -70,12 +70,12 @@ class FleetModel:
                 raise DuplicateError(f"Номер {vehicle.plate} вже зайнятий.")
             self._vehicles.append(vehicle)
 
-    def find_by_plate(self, text):
+    def find_vehicles(self, text):
         query = text.strip().upper()
         with self._lock:
             found = []
             for v in self._vehicles:
-                if query in v.plate:
+                if query in v.plate or query in v.brand.upper():
                     found.append(v)
             return found
 
@@ -125,6 +125,34 @@ class FleetModel:
                 raise TripConflictError(f"Поїздка {trip.trip_id} перетинається в часі з поїздкою "
                                         f"{conflicts[0].trip_id} (той самий водій або авто).")
             self._trips.append(trip)
+
+    # ШІ: Claude Code, Claude Opus 5.5 – методи find_trip і update_trip (редагування поїздки).
+    # Змінено: без змін.
+    def find_trip(self, trip_id: str) -> Trip:
+        """Повертає поїздку за ID або кидає NotFoundError."""
+        with self._lock:
+            for trip in self._trips:
+                if trip.trip_id == trip_id:
+                    return trip
+        raise NotFoundError(f"Поїздку {trip_id} не знайдено.")
+
+    def update_trip(self, trip: Trip) -> None:
+        """Ставить нову поїздку на місце поїздки з таким самим ID; у разі помилки набір не змінюється."""
+        with self._lock:
+            if not any(d.driver_id == trip.driver.driver_id for d in self._drivers):
+                raise NotFoundError(f"Водія {trip.driver.driver_id} немає в наборі.")
+            if not any(v.plate == trip.vehicle.plate for v in self._vehicles):
+                raise NotFoundError(f"Авто {trip.vehicle.plate} немає в наборі.")
+            for index, old in enumerate(self._trips):
+                if old.trip_id == trip.trip_id:
+                    break
+            else:
+                raise NotFoundError(f"Поїздку {trip.trip_id} не знайдено.")
+            conflicts = self._conflicts(trip)  # стару версію overlaps() не враховує: у неї той самий ID
+            if conflicts:
+                raise TripConflictError(f"Поїздка {trip.trip_id} перетинається в часі з поїздкою "
+                                        f"{conflicts[0].trip_id} (той самий водій або авто).")
+            self._trips[index] = trip
 
     def remove_trip(self, trip_id: str) -> None:
         with self._lock:

@@ -95,12 +95,14 @@ class FleetModel {
   + add_vehicle(vehicle : Vehicle) : None
   + add_driver(driver : Driver) : None
   + add_trip(trip : Trip) : None
-  + find_by_plate(text : str) : list[Vehicle]
+  + find_vehicles(text : str) : list[Vehicle]
   + find_vehicle(plate : str) : Vehicle
   + find_driver(driver_id : str) : Driver
+  + find_trip(trip_id : str) : Trip
   + find_conflicts(trip : Trip) : list[Trip]
   + update_vehicle(plate, brand, year, mileage, last_service) : None
   + update_driver(driver_id, full_name, categories) : None
+  + update_trip(trip : Trip) : None
   + remove_vehicle(plate : str) : None
   + remove_driver(driver_id : str) : None
   + remove_trip(trip_id : str) : None
